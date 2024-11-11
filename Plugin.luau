@@ -1,9 +1,16 @@
+print("Hello world!")
+local RunService = game:GetService("RunService")
+if (RunService:IsRunMode() or RunService:IsRunning()) then
+	return
+end
+
 -- Create the plugin toolbar and button
 local toolbar = plugin:CreateToolbar("Visibility Manager")
+print("Hello world!")
 local toggleButton = toolbar:CreateButton(
-	"Quick Visibility Tool", 
+	"V.2 Quick Visibility Tool", 
 	"Toggle visibility of selected instance's children", 
-	"rbxassetid://4458901886")
+	"rbxassetid://87906108033242")
 
 toggleButton.ClickableWhenViewportHidden = true
 -- Dock widget setup for the plugin UI
@@ -20,7 +27,7 @@ local widgetInfo = DockWidgetPluginGuiInfo.new(
 
 local widget = plugin:CreateDockWidgetPluginGui("VisibilityToggler", widgetInfo)
 widget.Title = "Visibility Manager"
-widget.Enabled = true  -- Start hidden until toggled by button
+widget.Enabled = false  -- Start hidden until toggled by button
 
 
 -- Toggle widget visibility when the button is clicked
@@ -100,18 +107,18 @@ local function populateUI(selectedInstance)
 	title.Text = "Target: " .. selectedInstance.Name
 
 	local layoutY = 40
-	
+
 	-- Handle Parent (selected instance)
-	
+
 	if (selectedInstance:IsA("GuiObject")) then
 		local checkboxFrame = createCheckbox(selectedInstance, true)
 		checkboxFrame.Position = UDim2.new(0, 10, 0, layoutY)
 		checkboxFrame.Parent = ui
 		layoutY = layoutY + 35  -- Move down for the next checkbox
 	end
-	
 
-	
+
+
 	for _, child in ipairs(selectedInstance:GetChildren()) do
 		if child:IsA("Instance") and child:IsA("GuiObject") then
 			-- Create checkbox only if the child has a Visible property
@@ -121,8 +128,8 @@ local function populateUI(selectedInstance)
 			layoutY = layoutY + 35  -- Move down for the next checkbox
 		end
 	end
-	
-	
+
+
 end
 
 -- Detect selection changes
