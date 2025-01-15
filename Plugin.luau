@@ -137,7 +137,6 @@ game:GetService("Selection").SelectionChanged:Connect(function()
 	local selectedInstance = game:GetService("Selection"):Get()  -- Get the first selected object
 
 	if (#selectedInstance == 1) then
-		print(selectedInstance[1].Name)
 		-- Populate UI with checkboxes for the children of the selected instance
 		populateUI(selectedInstance[1])
 	else
